@@ -1,0 +1,7 @@
+login phpmyadmin
+root
+inipasswordphpmyadmingue
+
+login admin
+admin@karcis.id
+admin
