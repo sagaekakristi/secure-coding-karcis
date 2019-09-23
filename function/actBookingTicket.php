@@ -3,7 +3,7 @@
 
     @session_start();
 
-    $id_user = @$_SESSION['id'];
+    $id_user = htmlentities(@$_SESSION['id']);
 
     $submit = @$_POST['submit'];
     $identity = (int)$submit[0];
