@@ -13,7 +13,7 @@ if(!$id){
 }
 
 // get data user
-$user = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = $id_booking AND tickets.id = $id_ticket AND id_user = $id";
+$user = "SELECT tickets.from, tickets.to, tickets.created_at, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = $id_booking AND tickets.id = $id_ticket AND id_user = $id";
 
 $result = $conn->query($user);
 

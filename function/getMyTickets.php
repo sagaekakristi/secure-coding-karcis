@@ -8,7 +8,7 @@
     }
 
     // get data user
-    $user = "SELECT tickets.*, booking.id as id_booking FROM booking 
+    $user = "SELECT tickets.from, tickets.to, tickets.id, booking.id as id_booking FROM booking 
             LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id_user = $id
             ORDER BY booking.created_at DESC ";
 
