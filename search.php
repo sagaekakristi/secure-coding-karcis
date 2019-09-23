@@ -1,7 +1,7 @@
 <?php
 include "header.php";
 
-$id_booking = @$_GET['IDBOOKING'];
+$id_booking = (int)@$_GET['IDBOOKING']; // parsing
 
 
     

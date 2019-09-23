@@ -1,8 +1,8 @@
 <?php
 include "header.php";
 
-$id_booking = @$_GET['IDBOOKING'];
-$id_ticket = @$_GET['IDTICKET'];
+$id_booking = htmlentities(@$_GET['IDBOOKING']);
+$id_ticket = htmlentities(@$_GET['IDTICKET']);
 
 @session_start();
     
@@ -13,10 +13,15 @@ if(!$id){
 }
 
 // get data user
-$user = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = $id_booking AND tickets.id = $id_ticket";
+$user = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = $id_booking AND tickets.id = $id_ticket AND id_user = $id";
 
 $result = $conn->query($user);
-$booking = $result->fetch_assoc()
+
+$booking = $result->fetch_assoc();
+if(count($booking)==0){ // redirect if not valid
+    unset($_SESSION['id']);
+    header('Location: '.$host);
+}
 ?>
 
     <div class="booking-body">

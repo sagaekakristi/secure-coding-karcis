@@ -1,7 +1,7 @@
 <?php
     include "../conn.php";
 
-    $email = @$_POST['email'];
+    $email = htmlentities(@$_POST['email']);
     $password = sha1(@$_POST['password']);
 
     $sql = "SELECT * FROM admin where email = '$email' and password = '$password'";
@@ -19,6 +19,7 @@
             header('Location: '.$host.'admin.php');
         }
     } else {
+        unset($_SESSION["id"]);
         header('Location: '.$host.'adminxyz.php?status=failed' );
     }
     $conn->close();
