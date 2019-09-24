@@ -5,6 +5,7 @@ include "function/getProfile.php";
 
 <div class="profile-body">
     <form action="<?php echo $host;?>function/actUpdateProfile.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
         <div class="profile-card">
             <h4>Edit Profile</h4>
             <hr class="profile-line"/>

@@ -1,5 +1,6 @@
 <?php
 include "../conn.php";
+include "../session.php";
 
 @session_start();
 
@@ -9,12 +10,25 @@ if(!$id){
     header('location:'.$host.'signin.php');
 }
 
-$fullname = @$_POST['fullname'];
-$email = @$_POST['email'];
-$phone = @$_POST['phone'];
+$fullname = htmlentities(@$_POST['fullname']);
+$email = htmlentities(@$_POST['email']);
+$phone = htmlentities(@$_POST['phone']);
 
 // mitra
 $fileName = $_FILES['userfile']['name'];
+
+if(!($_FILES["userfile"]["type"] == "image/png") 
+|| !($_FILES["userfile"]["type"] == "image/jpg") 
+|| !($_FILES["userfile"]["type"] == "image/gif")){
+    header('Location: '.$host.'profile.php?status=failed');
+    return;
+}
+
+$valid = check_token();
+if (!$valid) {
+    header('Location: '.$host.'profile.php?status=failed');
+    return;
+}
 
  // nama direktori upload
 $namaDir = '../files/';
