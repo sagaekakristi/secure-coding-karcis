@@ -1,22 +1,46 @@
 <?php
 include "header.php";
-
-$id_booking = @$_GET['IDBOOKING'];
-$id_ticket = @$_GET['IDTICKET'];
+include "function/valid.php";
 
 @session_start();
-    
+
 $id = @$_SESSION['id'];
 
 if(!$id){
     header('location:'.$host.'signin.php');
 }
+    
+$submit = true;
+$success = true;
+$message = "";
 
-// get data user
-$user = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = $id_booking AND tickets.id = $id_ticket";
+$id_booking = @$_GET['IDBOOKING'];
 
-$result = $conn->query($user);
-$booking = $result->fetch_assoc()
+if (valid_number($id_booking) === FALSE) {
+    $success = false;
+    $message = "ID booking tidak valid!";
+}
+
+if ($success) {
+    // get data user
+    $sql = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price FROM booking LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id = ? and booking.id_user = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ss', $id_booking, $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows <= 0) {
+        $success = false;
+        $message = "Booking tidak ditemukan!";
+    } else {
+        $success = true;
+    }
+}
+
+if ($success) {
+    $booking = $result->fetch_assoc();
+
 ?>
 
     <div class="booking-body">
@@ -61,5 +85,12 @@ $booking = $result->fetch_assoc()
         </div>
 
     </div>
+<?php } else { ?>
+    <div class="booking-body">
+        <div class="booking-card pb-1">
+            <h4 class="mb-4"><?php echo $message; ?></h4>
+        </div>
+    </div>
+<?php } ?>
 
 <?php include "footer.php";?>

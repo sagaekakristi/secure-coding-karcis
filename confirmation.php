@@ -1,13 +1,21 @@
 <?php
 include "header.php";
 
+unset($_SESSION['forgotPassword_submit']);
+unset($_SESSION['forgotPassword_success']);
+unset($_SESSION['forgotPassword_message']);
+
 $hash = @$_GET['hash'];
 
 $reset_password = "SELECT link FROM forgot_password WHERE hash = '$hash'";
 
-$reset_password_result = $conn->query($reset_password);
+$sql = "SELECT link FROM forgot_password WHERE hash = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $hash);
+$stmt->execute();
+$result = $stmt->get_result();
 
-$r_reset_password = mysqli_fetch_row($reset_password_result);
+$r_reset_password = mysqli_fetch_row($result);
 
 ?>
 

@@ -22,6 +22,3 @@
         header('Location: '.$host.'adminxyz.php?status=failed' );
     }
     $conn->close();
-
-
-?>

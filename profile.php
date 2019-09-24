@@ -1,18 +1,13 @@
 <?php
-    include "header.php";
-    include "function/getProfile.php";
+include "header.php";
+include "function/getProfile.php";
 
-    ?>
-
-<!-- cek tipe session -->
-<!-- jika session == admin, redirect ke halaman admin <?php echo $host;?>adminxyz.php -->
-
-<?php
 if($_SESSION['tipe'] == 'admin'){
     unset($_SESSION["id"]);
     header('Location: '.$host.'adminxyz.php');
     exit;
 }
+
 ?>
 
 <div class="profile-body">

@@ -36,6 +36,7 @@
             <?php
                 @session_start();
                 $id = @$_SESSION['id'];
+
                 if($id) { ?>
                     <a class="login" style="float:left"> 
                         <form action="search.php" method="get">

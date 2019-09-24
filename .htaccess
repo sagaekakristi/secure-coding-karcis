@@ -1,0 +1,20 @@
+ErrorDocument 404 http://localhost/karcis/404.php
+ErrorDocument 403 http://localhost/karcis/403.php
+
+# Disable directory browsing 
+Options -Indexes
+
+# Hide the contents of directories
+IndexIgnore *
+
+# Deny access to filenames starting with dot(.)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Deny access to files with extensions .ini, .psd, .log, .sh, .sql
+<FilesMatch "\.(ini|psd|log|sh|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
