@@ -23,7 +23,7 @@ if (isset($id_booking) && valid_number($id_booking) === FALSE) {
     $success = false;
     $message = "Id booking tidak sesuai!";
 } else if (isset($id_booking)){        
-    $sql = "SELECT tickets.*, booking.id as id_booking, booking.price as booking_price, booking.id_user, user_profile.fullname FROM booking LEFT JOIN user_profile ON user_profile.id_user = booking.id_user LEFT JOIN tickets ON tickets.id = booking.id_ticket  WHERE booking.id = ? and booking.id_user = ?";
+    $sql = "SELECT tickets.from, tickets.to, tickets.price, tickets.seats, booking.id as id_booking, booking.price as booking_price, booking.id_user, user_profile.fullname FROM booking LEFT JOIN user_profile ON user_profile.id_user = booking.id_user LEFT JOIN tickets ON tickets.id = booking.id_ticket  WHERE booking.id = ? and booking.id_user = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ss', $id_booking, $id);

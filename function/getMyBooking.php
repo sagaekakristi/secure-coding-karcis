@@ -15,7 +15,7 @@ $success = false;
 $message = "";
 
 // get data user
-$sql = "SELECT tickets.*, booking.id as id_booking FROM booking 
+$sql = "SELECT tickets.from, tickets.to, tickets.price, tickets.seats, booking.id as id_booking FROM booking 
     LEFT JOIN tickets ON tickets.id = booking.id_ticket WHERE booking.id_user = ?
     ORDER BY booking.created_at DESC ";
 

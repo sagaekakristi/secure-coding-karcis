@@ -8,5 +8,5 @@ if(!$id){
     exit;
 }
 
-$sql = "SELECT * FROM tickets where seats > 0";
+$sql = "SELECT t.from, t.to, t.price, t.seats FROM tickets t where seats > 0";
 $result = $conn->query($sql);
