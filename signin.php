@@ -4,7 +4,6 @@ include "header.php";
 
 <div class="login-clean">
         <form method="post" action="<?php echo $host;?>function/actSignin.php">
-             <!-- if signup failed -->
              <?php
                 if(@$_GET['status'] == 'failed'){
             ?>
@@ -12,8 +11,7 @@ include "header.php";
             <?php } else if(@$_GET['status'] == 'success'){ ?>
                 <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)">Signup Success</b>
             <?php } ?>
-            <!--  -->
-
+            
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="fa fa-ticket"></i></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
