@@ -12,7 +12,7 @@ if (!isset($_SESSION['signup_csrf_token']) || $_SESSION['signup_csrf_token'] != 
     $_SESSION['signup_message'] = 'Form tidak valid!';
 
     header('Location: '.$host.'signup.php' );
-    return;
+    exit;
 }
 
 $email = @$_POST['email'];
@@ -23,7 +23,7 @@ if (valid_email($email) === FALSE) {
     $_SESSION['signin_message'] = 'Email tidak valid!';
 
     header('Location: '.$host.'signup.php' );
-    return;
+    exit;
 }
 
 $fullname = @$_POST['fullname'];
@@ -50,7 +50,7 @@ if (valid_password($password) === FALSE) {
     $_SESSION['signup_message'] = 'Password kurang aman, minimal 8 karakter, kombinasi huruf besar, huruf kecil, dan angka!';
 
     header('Location: '.$host.'signup.php' );      
-    return;
+    exit;
 }
 
 // validate password and password confirm
@@ -63,7 +63,7 @@ if ($password_encrypt != $password_confirm_encrypt) {
     $_SESSION['signup_message'] = 'Konfirmasi password tidak sesuai!';
 
     header('location:'.$host.'signup.php');
-    return;
+    exit;
 }
 
 // check if email exist
@@ -76,12 +76,12 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $conn->close();
 
-    $_SESSION['signin_submit'] = false;
+    $_SESSION['signin_submit'] = true;
     $_SESSION['signin_success'] = true;
     $_SESSION['signin_message'] = 'Email sudah terdaftar! Silahkan login!';
 
     header('location:'.$host.'signin.php');
-    return;
+    exit;
 }
 
 // save user account
@@ -100,7 +100,7 @@ if (!$is_inserted === TRUE) {
     $_SESSION['signup_message'] = 'Tidak dapat melakukan registrasi!';
 
     header('location:'.$host.'signup.php');
-    return;
+    exit;
 }
 
 $id_user = $stmt->insert_id;
@@ -118,7 +118,7 @@ if(!$is_inserted === TRUE){
     $_SESSION['signup_message'] = 'Tidak dapat melakukan registrasi profil!';
 
     header('location:'.$host.'signup.php');
-    return;
+    exit;
 }
 
 $_SESSION['signin_submit'] = true;
@@ -126,4 +126,4 @@ $_SESSION['signin_success'] = true;
 $_SESSION['signin_message'] = 'Registrasi berhasil! Silahkan login!';
 
 header('location:'.$host.'signin.php');
-return;
+exit;

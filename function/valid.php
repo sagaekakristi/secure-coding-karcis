@@ -43,8 +43,9 @@ function valid_filename($input) {
 function valid_file($file, $ext, $mime) {
 	$file_name = $file['name'];
 	$file_type = $file['type'];
-	$file_ext = substr( $file_name, strrpos( $file_name, '.' ) + 1);
+	$file_ext  = substr( $file_name, strrpos( $file_name, '.' ) + 1);
+	$file_size = $file['size'];
 
-	return strtolower($file_ext) == $ext && $file_type == $mime;
+	return strtolower($file_ext) == $ext && $file_type == $mime && $file_size < 10485760;
 }
 

@@ -12,7 +12,7 @@ if (!isset($_SESSION['forgotPassword_csrf_token']) || $_SESSION['forgotPassword_
     $_SESSION['forgotPassword_message'] = 'Form tidak valid!';
 
     header('Location: '.$host.'forgotPassword.php' );
-    return;
+    exit;
 }
 
 $email = @$_POST['email'];
@@ -23,7 +23,7 @@ if (valid_email($email) === FALSE) {
     $_SESSION['forgotPassword_message'] = 'Format email tidak valid!';
 
     header('Location: '.$host.'forgotPassword.php' );
-    return;
+    exit;
 }
 
 $hash = sha1($email . uniqid('', true));
@@ -44,7 +44,7 @@ if ($result->num_rows <= 0) {
     $_SESSION['signin_message'] = 'Email tidak ditemukan! Silahkan login!';
 
     header('location:'.$host.'forgotPassword.php');
-    return;
+    exit;
 }
 
 $sql = "INSERT INTO forgot_password (email, hash, link) VALUES (?, ?, ?)";
@@ -61,7 +61,7 @@ if (!$is_inserted === TRUE) {
     $_SESSION['forgotPassword_message'] = 'Tidak dapat melakukan membuat link!';
 
     header('location:'.$host.'forgotPassword.php');
-    return;
+    exit;
 }
 
 $_SESSION['forgotPassword_submit'] = true;

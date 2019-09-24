@@ -5,7 +5,7 @@ $id = @$_SESSION['id'];
 
 if(!$id){
     header('location:'.$host.'signin.php');
-    return;
+    exit;
 }
 
 // get data user

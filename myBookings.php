@@ -10,11 +10,19 @@ if(!$id){
 ?>
 
 <div class="booking-body">
+    <?php
+        $submit = $_SESSION['booking_submit'] ?? false;
+        $success = $_SESSION['booking_success'] ?? false;
+        $message = $_SESSION['booking_message'] ?? '';
 
-    <?php if(@$_GET['status'] == 'success') { ?>
-        <div class="profile-card" style="padding: 1rem 2rem; margin: 0 auto 1rem;">
-            <b class="font-notify">Booked Success</b>
-        </div>
+        unset($_SESSION['booking_submit']);
+        unset($_SESSION['booking_error']);
+        unset($_SESSION['booking_message']);
+        if(isset($submit) && $success){
+    ?>
+        <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
+    <?php } else if(isset($submit) && !$success) { ?>
+        <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
     <?php } ?>
 
     <div class="booking-card pb-1">

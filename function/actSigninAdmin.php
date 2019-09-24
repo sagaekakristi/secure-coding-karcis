@@ -11,7 +11,7 @@ if (!isset($_SESSION['admin_csrf_token']) || $_SESSION['admin_csrf_token'] != $c
     $_SESSION['signin_message'] = 'Form tidak valid!';
 
     header('Location: '.$host.'adminxyz.php' );
-    return;
+    exit;
 }
 
 $email = @$_POST['email'];
@@ -22,7 +22,7 @@ if (valid_email($email) === FALSE) {
     $_SESSION['signin_message'] = 'Format email tidak valid!';
 
     header('Location: '.$host.'signin.php' );
-    return;
+    exit;
 }
 
 $password = @$_POST['password'];
@@ -33,7 +33,7 @@ if (valid_password($password) === FALSE) {
     $_SESSION['signin_message'] = 'Format password tidak valid!';
 
     header('Location: '.$host.'signin.php' );
-    return;
+    exit;
 }
 
 $sql = "SELECT * FROM admin where email = ? and password = ?";

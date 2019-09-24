@@ -12,7 +12,7 @@ if (!isset($_SESSION['signin_csrf_token']) || $_SESSION['signin_csrf_token'] != 
     $_SESSION['signin_message'] = 'Form tidak valid!';
 
     header('Location: '.$host.'signin.php' );
-    return;
+    exit;
 }
 
 $email = @$_POST['email'];
@@ -23,7 +23,7 @@ if (valid_email($email) === FALSE) {
     $_SESSION['signin_message'] = 'Format email tidak valid!';
 
     header('Location: '.$host.'signin.php' );
-    return;
+    exit;
 }
 
 $password = @$_POST['password'];
@@ -34,7 +34,7 @@ if (valid_password($password) === FALSE) {
     $_SESSION['signin_message'] = 'Format password tidak valid!';
 
     header('Location: '.$host.'signin.php' );
-    return;
+    exit;
 }
 
 $password_encrypt = sha1(@$_POST['password']);
