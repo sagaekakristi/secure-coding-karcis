@@ -1,0 +1,8 @@
+Options -Indexes
+
+Options +FollowSymlinks
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www.)?localhost/ [nc]
+RewriteRule .*.(gif|jpg|png)$ http://localhost/img/hotlink_f_o.png [nc]
+
