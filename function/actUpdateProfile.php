@@ -96,7 +96,7 @@ if (!isset($file)) {
 
 $fileName = $file['name'];
 
-if (valid_filename($fileName)) {
+if (valid_filename($fileName) === FALSE) {
     $_SESSION['profile_submit'] = true;
     $_SESSION['profile_success'] = false;
     $_SESSION['profile_message'] = 'Nama file tidak valid!';
@@ -117,8 +117,10 @@ if (valid_file($file, 'jpg', 'image/jpeg') === FALSE && valid_file($file, 'jpeg'
  // nama direktori upload
 $namaDir = '../files/';
 
+$filename_hash = sha1($fileName . uniqid('', true));
+
 // membuat path nama direktori + nama file.
-$pathFile = $namaDir.$fileName;
+$pathFile = $namaDir.$filename_hash;
 
 // memindahkan file ke temporary
 $tmpName  = $file['tmp_name'];
@@ -131,32 +133,32 @@ if (move_uploaded_file($file['tmp_name'], $pathFile)) {
     $stmt->bind_param('ss', $email, $id);
     $stmt->execute();
 
-    $is_users_updated = $stmt->affected_rows == 1;
+    // $is_users_updated = $stmt->affected_rows == 1;
 
-    if(!$is_users_updated){
-        $_SESSION['profile_submit'] = true;
-        $_SESSION['profile_success'] = false;
-        $_SESSION['profile_message'] = 'Tidak dapat menyimpan akun user!';
+    // if(!$is_users_updated){
+    //     $_SESSION['profile_submit'] = true;
+    //     $_SESSION['profile_success'] = false;
+    //     $_SESSION['profile_message'] = 'Tidak dapat menyimpan akun user!';
 
-        header('Location: '.$host.'editProfile.php' );
-        exit;
-    }
+    //     header('Location: '.$host.'editProfile.php' );
+    //     exit;
+    // }
 
     $sql = "UPDATE user_profile SET fullname = ?, phone = ?, identity_card = ? WHERE id_user = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssss', $fullname, $phone, $fileName, $id_user);
+    $stmt->bind_param('ssss', $fullname, $phone, $filename_hash, $id);
     $stmt->execute();
 
-    $is_user_profile_updated = $stmt->affected_rows == 1;
+    // $is_user_profile_updated = $stmt->affected_rows == 1;
 
-    if(!$is_users_profile_updated){
-        $_SESSION['profile_submit'] = true;
-        $_SESSION['profile_success'] = false;
-        $_SESSION['profile_message'] = 'Tidak dapat menyimpan profile user!';
+    // if(!$is_users_profile_updated){
+    //     $_SESSION['profile_submit'] = true;
+    //     $_SESSION['profile_success'] = false;
+    //     $_SESSION['profile_message'] = 'Tidak dapat menyimpan profile user!';
 
-        header('Location: '.$host.'editProfile.php' );
-        exit;
-    }
+    //     header('Location: '.$host.'editProfile.php' );
+    //     exit;
+    // }
 
     $_SESSION['profile_submit'] = true;
     $_SESSION['profile_success'] = true;
