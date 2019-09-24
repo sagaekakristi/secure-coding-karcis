@@ -12,6 +12,16 @@
     $seats = (int)@$_POST['seats'][$identity];
     $price = (int)@$_POST['price'][$identity];
 
+    $db = $conn->query("SELECT price, seats from tickets where id = $id_ticket");
+    $row = mysqli_fetch_array($db);
+    if (count($row) == 0) {
+        header('Location: '.$host.'myBookings.php?status=seatsFailed');
+        return;
+    }
+
+    $price = $row['price']; // overide value
+    $seats = $row['seats']; // overide value
+
     $percent = 10;
 
     $percentInDecimal = $percent / 100;
