@@ -11,6 +11,23 @@ if(!$id){
     exit;
 }
 
+$sql = "SELECT id FROM users where id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows <= 0) {
+    $conn->close();
+
+    $_SESSION['ticket_submit'] = true;
+    $_SESSION['ticket_success'] = false;
+    $_SESSION['ticket_message'] = 'User tidak ditemukan!';
+
+    header('location:'.$host.'tickets.php');
+    exit;
+}
+
 // check ticket
 $id_ticket = @$_POST['id_ticket'];
 
@@ -25,7 +42,7 @@ if (valid_number($id_ticket) === FALSE) {
     exit;
 }
 
-$sql = "SELECT * FROM tickets where id = ?";
+$sql = "SELECT t.from, t.to, t.seats, t.price FROM tickets t where id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $id_ticket);
 $stmt->execute();
@@ -64,7 +81,6 @@ if($ticket['seats'] < 1){
     header('location:'.$host.'tickets.php');
     exit;
 }
-
 
 // insert table booking
 $sql = "INSERT INTO booking (id_user, id_ticket, status, price) VALUES (?, ?, 0, ?)";

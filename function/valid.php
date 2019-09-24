@@ -23,7 +23,8 @@ function valid_email($input) {
 function valid_url($input) {
 	$regex = "/(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/";
 
-	return valid_regex($input, $regex) &&  filter_var($input, FILTER_VALIDATE_URL);
+	// return valid_regex($input, $regex) && filter_var($input, FILTER_VALIDATE_URL) !== FALSE;
+	return filter_var($input, FILTER_VALIDATE_URL) !== FALSE;
 }
 
 function valid_password($input) {
