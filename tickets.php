@@ -22,6 +22,7 @@ include "function/getTickets.php";
             ?>
             <div class="col">
                 <form action="<?php echo $host;?>function/actBookingTicket.php" method="POST">
+                    <input type='hidden' name='token' value="<?php echo $_SESSION['token']; ?>" />
                     <div class="card cards-shadown cards-hover">
                         <div class="card-header">
                             <div class="cardheader-text">

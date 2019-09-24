@@ -2,6 +2,7 @@
     include "../conn.php";
 
     @session_start();
+    include "../session.php";
 
     $id_user = @$_SESSION['id'];
 
@@ -11,6 +12,12 @@
     $id_ticket = (int)@$_POST['id_ticket'][$identity];
     $seats = (int)@$_POST['seats'][$identity];
     $price = (int)@$_POST['price'][$identity];
+
+    $valid = check_token();
+    if (!$valid) {
+        header('Location: '.$host.'myBookings.php?status=seatsFailed');
+        return;
+    }
 
     $db = $conn->query("SELECT price, seats from tickets where id = $id_ticket");
     $row = mysqli_fetch_array($db);

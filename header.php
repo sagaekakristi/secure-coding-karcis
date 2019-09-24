@@ -67,3 +67,4 @@
             </div>
         </nav>
     </div>
+<?php include 'session.php'; ?>
