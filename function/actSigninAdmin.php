@@ -6,9 +6,9 @@ include "./valid.php";
 $csrf_token = $_POST['csrf_token'];
 
 if (!isset($_SESSION['admin_csrf_token']) || $_SESSION['admin_csrf_token'] != $csrf_token) {
-    $_SESSION['signin_submit'] = true;
-    $_SESSION['signin_success'] = false;
-    $_SESSION['signin_message'] = 'Form tidak valid!';
+    $_SESSION['admin_submit'] = true;
+    $_SESSION['admin_success'] = false;
+    $_SESSION['admin_message'] = 'Form tidak valid!';
 
     header('Location: '.$host.'adminxyz.php' );
     exit;
@@ -17,9 +17,9 @@ if (!isset($_SESSION['admin_csrf_token']) || $_SESSION['admin_csrf_token'] != $c
 $email = @$_POST['email'];
 
 if (valid_email($email) === FALSE) {
-    $_SESSION['signin_submit'] = true;
-    $_SESSION['signin_success'] = false;
-    $_SESSION['signin_message'] = 'Format email tidak valid!';
+    $_SESSION['admin_submit'] = true;
+    $_SESSION['admin_success'] = false;
+    $_SESSION['admin_message'] = 'Format email tidak valid!';
 
     header('Location: '.$host.'signin.php' );
     exit;
@@ -27,14 +27,15 @@ if (valid_email($email) === FALSE) {
 
 $password = @$_POST['password'];
 
-if (valid_password($password) === FALSE) {
-    $_SESSION['signin_submit'] = true;
-    $_SESSION['signin_success'] = false;
-    $_SESSION['signin_message'] = 'Format password tidak valid!';
+// TODO temporary disabled because no registration available for admin
+// if (valid_password($password) === FALSE) {
+//     $_SESSION['admin_submit'] = true;
+//     $_SESSION['admin_success'] = false;
+//     $_SESSION['admin_message'] = 'Format password tidak valid!';
 
-    header('Location: '.$host.'signin.php' );
-    exit;
-}
+//     header('Location: '.$host.'signin.php' );
+//     exit;
+// }
 
 $sql = "SELECT * FROM admin where email = ? and password = ?";
 $stmt = $conn->prepare($sql);
