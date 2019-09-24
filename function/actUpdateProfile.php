@@ -105,7 +105,12 @@ if (valid_filename($fileName)) {
 }
 
 if (valid_file($file, 'jpg', 'image/jpeg') === FALSE && valid_file($file, 'jpeg', 'image/jpeg') === FALSE && valid_file($file, 'png', 'image/png')) {
-    // TODO do something here
+    $_SESSION['profile_submit'] = true;
+    $_SESSION['profile_success'] = false;
+    $_SESSION['profile_message'] = 'Tipe file tidak valid!';
+
+    header('Location: '.$host.'editProfile.php' );
+    return;
 }
 
  // nama direktori upload
@@ -114,41 +119,56 @@ $namaDir = '../files/';
 // membuat path nama direktori + nama file.
 $pathFile = $namaDir.$fileName;
 
-if ($fileName) {
-    // memindahkan file ke temporary
-    $tmpName  = $file['tmp_name'];
+// memindahkan file ke temporary
+$tmpName  = $file['tmp_name'];
 
-    // proses upload file dari temporary ke path file
-    if (move_uploaded_file($file['tmp_name'], $pathFile)) {
-        // update data
-        $user = "UPDATE users SET email = '$email' WHERE id = $id";
-        $conn->query($user);
+// proses upload file dari temporary ke path file
+if (move_uploaded_file($file['tmp_name'], $pathFile)) {
+    // save user account
+    $sql = "UPDATE users SET email = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ss', $email, $id);
+    $stmt->execute();
 
-        $userProfile = "UPDATE user_profile SET fullname = '$fullname', phone = '$phone', identity_card = '$fileName' WHERE id_user = $id";
-        $conn->query($userProfile);
+    $is_users_updated = $stmt->affected_rows == 1;
 
-        if($conn->query($user) === FALSE && $conn->query($userProfile) === FALSE){
-            echo("Error description: " . mysqli_error($conn));
-        }
+    if(!$is_users_updated){
+        $_SESSION['profile_submit'] = true;
+        $_SESSION['profile_success'] = false;
+        $_SESSION['profile_message'] = 'Tidak dapat menyimpan akun user!';
 
-        header('Location: '.$host.'profile.php');
-    } else {
-        var_dump($file['error']);
-        echo "File gagal diupload.";
+        header('Location: '.$host.'editProfile.php' );
+        return;
     }
+
+    $sql = "UPDATE user_profile SET fullname = ?, phone = ?, identity_card = ? WHERE id_user = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssss', $fullname, $phone, $fileName, $id_user);
+    $stmt->execute();
+
+    $is_user_profile_updated = $stmt->affected_rows == 1;
+
+    if(!$is_users_profile_updated){
+        $_SESSION['profile_submit'] = true;
+        $_SESSION['profile_success'] = false;
+        $_SESSION['profile_message'] = 'Tidak dapat menyimpan profile user!';
+
+        header('Location: '.$host.'editProfile.php' );
+        return;
+    }
+
+    $_SESSION['profile_submit'] = true;
+    $_SESSION['profile_success'] = true;
+    $_SESSION['profile_message'] = 'Profil berhasil disimpan!';
+
+    header('Location: '.$host.'profile.php');
+    return;
 } else {
-    // update data
-    $user = "UPDATE users SET email = '$email' WHERE id = $id";
-    $conn->query($user);
+    $_SESSION['profile_submit'] = true;
+    $_SESSION['profile_success'] = false;
+    $_SESSION['profile_message'] = 'Tidak dapat menyimpan file!';
 
-    $userProfile = "UPDATE user_profile SET fullname = '$fullname', phone = '$phone' WHERE id_user = $id";
-    $conn->query($userProfile);
-
-    if($conn->query($user) === FALSE && $conn->query($userProfile) === FALSE){
-        echo("Error description: " . mysqli_error($conn));
-    }
-
-    header('Location: '.$host.'profile.php?status=success');
+    header('Location: '.$host.'editProfile.php' );
 }
 
 
