@@ -37,11 +37,11 @@ if (valid_password($password) === FALSE) {
     return;
 }
 
-$password = sha1(@$_POST['password']);
+$password_encrypt = sha1(@$_POST['password']);
 
 $sql = "SELECT * FROM users where email = ? and password = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('ss', $email, $password);
+$stmt->bind_param('ss', $email, $password_encrypt);
 $stmt->execute();
 $result = $stmt->get_result();
 

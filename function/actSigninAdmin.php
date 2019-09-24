@@ -1,24 +1,71 @@
 <?php
-    include "../conn.php";
+include "../conn.php";
+include "./valid.php";
+@session_start();
 
-    $email = @$_POST['email'];
-    $password = sha1(@$_POST['password']);
+$csrf_token = $_POST['csrf_token'];
 
-    $sql = "SELECT * FROM admin where email = '$email' and password = '$password'";
-    $result = $conn->query($sql);
+if (!isset($_SESSION['admin_csrf_token']) || $_SESSION['admin_csrf_token'] != $csrf_token) {
+    $_SESSION['signin_submit'] = true;
+    $_SESSION['signin_success'] = false;
+    $_SESSION['signin_message'] = 'Form tidak valid!';
 
+    header('Location: '.$host.'adminxyz.php' );
+    return;
+}
 
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            session_start();
-            @$_SESSION["id"] = $row['id'];
-            @$_SESSION["fullname"] = $row['fullname'];
-            @$_SESSION['tipe'] = 'admin';
-       
-            header('Location: '.$host.'admin.php');
-        }
-    } else {
-        header('Location: '.$host.'adminxyz.php?status=failed' );
+$email = @$_POST['email'];
+
+if (valid_email($email) === FALSE) {
+    $_SESSION['signin_submit'] = true;
+    $_SESSION['signin_success'] = false;
+    $_SESSION['signin_message'] = 'Format email tidak valid!';
+
+    header('Location: '.$host.'signin.php' );
+    return;
+}
+
+$password = @$_POST['password'];
+
+if (valid_password($password) === FALSE) {
+    $_SESSION['signin_submit'] = true;
+    $_SESSION['signin_success'] = false;
+    $_SESSION['signin_message'] = 'Format password tidak valid!';
+
+    header('Location: '.$host.'signin.php' );
+    return;
+}
+
+$sql = "SELECT * FROM admin where email = ? and password = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ss', $email, $password_encrypt);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        @$_SESSION["id"] = $row['id'];
+        @$_SESSION["fullname"] = $row['fullname'];
+        @$_SESSION['tipe'] = 'admin';
     }
-    $conn->close();
+
+    unset($_SESSION['admin_submit']);
+    unset($_SESSION['admin_success']);
+    unset($_SESSION['admin_message']);
+    
+    // revalidate back history
+    header('Cache-Control', 'nocache, no-store, max-age=0, must-revalidate');
+    header('Pragma', 'no-cache');
+    header('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
+
+    header('Location: '.$host.'admin_dash.php');
+} else {
+    $_SESSION['admin_submit'] = true;
+    $_SESSION['admin_success'] = true;
+    $_SESSION['admin_message'] = 'Email dan Password tidak sesuai';
+
+    header('Location: '.$host.'adminxyz.php' );
+}
+
+$conn->close();

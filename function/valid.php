@@ -20,6 +20,12 @@ function valid_email($input) {
   return valid_regex($input, $regex) && filter_var($input, FILTER_VALIDATE_EMAIL) !== FALSE;
 }
 
+function valid_url($input) {
+	$regex = "/(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/";
+
+	return valid_regex($input, $regex) &&  filter_var($input, FILTER_VALIDATE_URL);
+}
+
 function valid_password($input) {
 	$uppercase = valid_regex($input, '@[A-Z]@');
 	$lowercase = valid_regex($input, '@[a-z]@');

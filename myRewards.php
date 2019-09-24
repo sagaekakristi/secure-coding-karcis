@@ -5,6 +5,7 @@ $id = @$_SESSION['id'];
 
 if(!$id){
     header('location:'.$host.'signin.php');
+    return;
 }
 ?>
 
@@ -26,7 +27,7 @@ if(!$id){
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
                     <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lalajo.com/reward?idReward=SDFEG4356">
-                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
+                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARANG!</button>
                     </a>
                 </div>
             </div>
@@ -45,7 +46,7 @@ if(!$id){
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
                     <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lanjalan.com/reward?idReward=AF43546YG">
-                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
+                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARANG!</button>
                     </a>
                 </div>
             </div>
@@ -64,7 +65,7 @@ if(!$id){
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
                     <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lalajo.com/reward?idReward=Q453WTED">
-                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
+                        <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARANG!</button>
                     </a>
                 </div>
             </div>
