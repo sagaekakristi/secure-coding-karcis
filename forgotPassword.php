@@ -8,7 +8,6 @@ $_SESSION['forgotPassword_csrf_token'] = $csrf_token;
 
 <div class="login-clean">
         <form method="post" action="<?php echo $host;?>function/actForgotPassword.php">
-             <!-- if signup failed -->
              <?php
                 $submit = $_SESSION['forgotPassword_submit'] ?? false;
                 $success = $_SESSION['forgotPassword_success'] ?? false;
@@ -23,7 +22,6 @@ $_SESSION['forgotPassword_csrf_token'] = $csrf_token;
             <?php } else if(isset($submit) && !$success) { ?>
                 <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
             <?php } ?>
-            <!--  -->
 
             <h2 class="sr-only">Forgot Password</h2>
             <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" />

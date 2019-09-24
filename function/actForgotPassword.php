@@ -27,7 +27,19 @@ if (valid_email($email) === FALSE) {
 }
 
 $hash = sha1($email . uniqid('', true));
-$link = $_SERVER['HTTP_HOST'].$host."resetPassword.php?hash=".$hash;
+$http_host =  $_SERVER['HTTP_HOST'];
+$whitelist = ['localhost'];
+
+if (!in_array($http_host, $whitelist)) {
+    $_SESSION['forgotPassword_submit'] = true;
+    $_SESSION['forgotPassword_success'] = false;
+    $_SESSION['forgotPassword_message'] = 'Host tidak valid!';
+
+    header('Location: '.$host.'forgotPassword.php' );
+    exit;
+}
+
+$link = $http_host.$host."resetPassword.php?hash=".$hash;
 
 // check if email exist
 $sql = "SELECT * FROM users where email = ?";

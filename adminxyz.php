@@ -9,7 +9,6 @@ $_SESSION['admin_csrf_token'] = $csrf_token;
 
 <div class="login-clean">
     <form method="post" action="<?php echo $host;?>function/actSigninAdmin.php">
-        <!-- if admin failed -->
          <?php
             $submit = $_SESSION['admin_submit'] ?? false;
             $success = $_SESSION['admin_success'] ?? false;
@@ -24,7 +23,6 @@ $_SESSION['admin_csrf_token'] = $csrf_token;
         <?php } else if(isset($submit) && !$success) { ?>
             <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
         <?php } ?>
-        <!--  -->
 
         <h2 class>Login Admin</h2>
         <div class="illustration"><i class="fa fa-ticket"></i></div>

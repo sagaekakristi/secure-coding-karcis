@@ -10,7 +10,6 @@ $_SESSION['ticket_csrf_token'] = $csrf_token;
 <div class="container profile profile-view">
         <div class="row">
             <div class="col-md-12 alert-col relative">
-                <!-- if ticket failed -->
                 <?php
                     $submit = $_SESSION['ticket_submit'] ?? false;
                     $success = $_SESSION['ticket_success'] ?? false;
@@ -25,7 +24,6 @@ $_SESSION['ticket_csrf_token'] = $csrf_token;
                 <?php } else if(isset($submit) && !$success) { ?>
                     <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
                 <?php } ?>
-                <!--  -->
             </div>
         </div>
         <div class="row space-rows">

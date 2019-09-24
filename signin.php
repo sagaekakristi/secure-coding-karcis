@@ -9,7 +9,6 @@ $_SESSION['signin_csrf_token'] = $csrf_token;
 
 <div class="login-clean">
         <form method="post" action="<?php echo $host;?>function/actSignin.php">
-             <!-- if signup failed -->
              <?php
                 $submit = $_SESSION['signin_submit'] ?? false;
                 $success = $_SESSION['signin_success'] ?? false;
@@ -24,7 +23,6 @@ $_SESSION['signin_csrf_token'] = $csrf_token;
             <?php } else if(isset($submit) && !$success) { ?>
                 <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
             <?php } ?>
-            <!--  -->
 
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="fa fa-ticket"></i></div>

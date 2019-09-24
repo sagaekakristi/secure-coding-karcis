@@ -18,7 +18,6 @@ $_SESSION['profile_csrf_token'] = $csrf_token;
 <div class="profile-body">
     <form action="<?php echo $host;?>function/actUpdateProfile.php" method="post" enctype="multipart/form-data">
         <div class="profile-card">
-            <!-- if signup failed -->
              <?php
                 $submit = $_SESSION['profile_submit'] ?? false;
                 $success = $_SESSION['profile_success'] ?? false;
@@ -33,7 +32,7 @@ $_SESSION['profile_csrf_token'] = $csrf_token;
             <?php } else if(isset($submit) && !$success) { ?>
                 <b style="display: block;position: relative;text-align:center; color: rgb(244,71,107)"><?php echo $message; ?></b>
             <?php } ?>
-            <!--  -->
+            
             <h4>Edit Profile</h4>
             <hr class="profile-line"/>
             <div class="form-row mx-auto pb-4">
