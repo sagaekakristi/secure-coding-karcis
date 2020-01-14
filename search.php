@@ -30,7 +30,7 @@ $result = $conn->query($ticket);
                     while($row = $result->fetch_assoc()) {
 
             ?>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4">
                     <div class="card cards-shadown cards-hover">
                         <div class="card-body">
                             <p class="card-text cardbody-sub-text" style="float: left;font-size: 18px;">

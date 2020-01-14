@@ -3,28 +3,34 @@ include "../conn.php";
 
 @session_start();
 
-$id = @$_SESSION['id'];
-
-if(!$id){
-    header('location:'.$host.'signin.php');
-}
-
+$id = @$_POST['id_user'];
 $fullname = @$_POST['fullname'];
 $email = @$_POST['email'];
-$phone = @$_POST['phone'];
+$phone = 0;
+
+if(@$_POST['phone'] != '' || @$_POST['phone'] != null){
+    $phone = @$_POST['phone'];
+}
+
 
 // mitra
 $fileName = $_FILES['userfile']['name'];
+
+
 
  // nama direktori upload
 $namaDir = '../files/';
 
 // membuat path nama direktori + nama file.
-$pathFile = $namaDir.$fileName;
+// $pathFile = $namaDir.$fileName;
 
 if ($fileName) {
     // memindahkan file ke temporary
     $tmpName  = $_FILES['userfile']['tmp_name'];
+
+    $temp = explode(".", $fileName);
+    $newfilename = round(microtime(true)) . '.' . end($temp);
+    $pathFile = $namaDir.$newfilename;
 
     // proses upload file dari temporary ke path file
     if (move_uploaded_file($_FILES['userfile']['tmp_name'], $pathFile)) {
@@ -32,7 +38,7 @@ if ($fileName) {
         $user = "UPDATE users SET email = '$email' WHERE id = $id";
         $conn->query($user);
 
-        $userProfile = "UPDATE user_profile SET fullname = '$fullname', phone = '$phone', identity_card = '$fileName' WHERE id_user = $id";
+        $userProfile = "UPDATE user_profile SET fullname = '$fullname', phone = '$phone', identity_card = '$newfilename' WHERE id_user = $id ";
         $conn->query($userProfile);
 
         if($conn->query($user) === FALSE && $conn->query($userProfile) === FALSE){

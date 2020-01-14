@@ -9,6 +9,7 @@ include "function/getProfile.php";
             <h4>Edit Profile</h4>
             <hr class="profile-line"/>
             <div class="form-row mx-auto pb-4">
+                <input type="hidden" name="id_user" value="<?php echo $user_profile['id_user'];?>">
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Nama Lengkap</label>
                     <input class="form-control font-field" style="width: 100%; height: 50px;" type="text" autocomplete="off" name="fullname" value="<?php echo $user_profile['fullname'];?>">
@@ -23,7 +24,7 @@ include "function/getProfile.php";
                 </div>
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Identitas (KTP/SIM/PASSPORT)</label>
-                    <input type="file" class="form-control" name="userfile" style="padding: 3px;">
+                    <input type="file" class="form-control" id="image" accept="image/*" onChange="validate(this.value)" name="userfile" style="padding: 3px;" accept=".jpg,.jpeg">
                 </div>
             </div>
             <hr class="profile-line"/>
@@ -39,3 +40,16 @@ include "function/getProfile.php";
 <?php
 include "footer.php";
 ?>
+
+<script>
+function validate(file) {
+    var ext = file.split(".");
+    ext = ext[ext.length-1].toLowerCase();      
+    var arrayExtensions = ["jpg" , "jpeg", "png", "bmp", "gif"];
+
+    if (arrayExtensions.lastIndexOf(ext) == -1) {
+        alert("Wrong extension type.");
+        $("#image").val("");
+    }
+}
+</script>
