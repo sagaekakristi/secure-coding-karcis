@@ -3,7 +3,8 @@
 
     $email = @$_POST['email'];
     $hash = sha1($email);
-    $link = $_SERVER['HTTP_HOST'].$host."resetPassword.php?hash=".$hash;
+    $link = $host."resetPassword.php?hash=".$hash;
+
 
     $sql = "INSERT INTO forgot_password (email, hash, link)
     VALUES ('$email', '$hash', '$link')";

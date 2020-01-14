@@ -53,7 +53,7 @@ if($_SESSION['tipe'] == 'admin'){
                 </div>
                 <div class="center pb-4 pt-4">
                     <?php if($user_profile['identity_card']){
-                        echo "<img src =".$host."files/".$user_profile['identity_card']." style='width: 400px'>";
+                        echo "<img src =".$host."files/".$user_profile['identity_card']." style='width: 180px'>";
                     } ?>
                 </div>
             </div>

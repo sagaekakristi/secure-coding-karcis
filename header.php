@@ -57,6 +57,7 @@
                             <a class="login" href="myBookings.php">My Bookings</a>
                             <a class="login" href="myRewards.php">My Rewards</a>
                             <a class="login" href="profile.php">Profile</a>
+                            <a class="login" href="changePassword.php">Ganti Password</a>
                             <a class="login" href="<?php echo $host;?>function/logout.php">Logout</a>
                             <?php } else { ?>
                             <a class="login" href="signin.php">Log In</a>

@@ -19,7 +19,7 @@ include "header.php";
                     <p class="booking-font-field">GRATIS! Menonton 5 Film di hari Sabtu dan Minggu</p>
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
-                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lalajo.com/reward?idReward=SDFEG4356">
+                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.google.com/reward?idReward=SDFEG4356">
                         <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
                     </a>
                 </div>
@@ -38,7 +38,7 @@ include "header.php";
                     <p class="booking-font-field">Anda Mendapatkan Voucher 90% Paket Jalan-jalan ke Korea Selatan</p>
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
-                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lanjalan.com/reward?idReward=AF43546YG">
+                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.google.com/reward?idReward=AF43546YG">
                         <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
                     </a>
                 </div>
@@ -57,7 +57,7 @@ include "header.php";
                     <p class="booking-font-field">SELAMAT! Anda berhak mendapatkan liburan GRATIS selama 3 bulan di ASGARUT SPACE</p>
                 </div>
                 <div class="col-md-3 p-0 m-0 text-right">
-                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.lalajo.com/reward?idReward=Q453WTED">
+                    <a href="<?php echo $host;?>function/actGetReward.php?page=https://www.google.com/reward?idReward=Q453WTED">
                         <button class="btn btn-booking-primary p-0 m-0" type="submit">AMBIL SEKARAANG!</button>
                     </a>
                 </div>
