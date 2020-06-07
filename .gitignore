@@ -9,3 +9,4 @@ db.php
 .env
 /vendor/
 composer.lock
+/files/
