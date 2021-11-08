@@ -8,9 +8,7 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$host = 'https://bb85357f2f84.ngrok.io/karcis/';
-// $host = 'http://192.168.1.176/karcis/';
-// $host = '/karcis/';
+$host = 'http://localhost/secure-coding-karcis/';
 
 error_reporting(E_ALL);
 
