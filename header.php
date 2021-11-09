@@ -33,33 +33,34 @@
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container" id="nav-menu"><a class="navbar-brand" href="<?php echo $host; ?>">Karcis</a>
 
-            <?php
+                <?php
                 @session_start();
                 $id = @$_SESSION['id'];
-                if($id) { ?>
-                    <a class="login" style="float:left"> 
+                if ($id) { ?>
+                    <a class="login" style="float:left">
                         <form action="search.php" method="get">
                             <input type="text" name="IDBOOKING" value="" placeholder="Search ID Booking">
-                            <button type="submit" role="button">Search</a>
-                            
-                        </form>
+                            <button type="submit" role="button">Search
+                    </a>
+
+                    </form>
                     </a>
                 <?php } ?>
 
                 <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse"
-                    id="navcol-1">
+                <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav mr-auto" style="color: #8e216f;"></ul>
-                    <span class="navbar-text actions"> 
+                    <span class="navbar-text actions">
                         <?php
-                        if($id) {?>
+                        if ($id) { ?>
+                            <a class="login" href="feedback.php">Feedback</a>
                             <a class="login" href="tickets.php">Tickets</a>
                             <a class="login" href="myBookings.php">My Bookings</a>
                             <a class="login" href="myRewards.php">My Rewards</a>
                             <a class="login" href="profile.php">Profile</a>
                             <a class="login" href="changePassword.php">Ganti Password</a>
-                            <a class="login" href="<?php echo $host;?>function/logout.php">Logout</a>
-                            <?php } else { ?>
+                            <a class="login" href="<?php echo $host; ?>function/logout.php">Logout</a>
+                        <?php } else { ?>
                             <a class="login" href="signin.php">Log In</a>
                             <a class="btn btn-light action-button" role="button" href="signup.php">Sign Up</a>
                         <?php } ?>
