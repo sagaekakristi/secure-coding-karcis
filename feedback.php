@@ -31,16 +31,16 @@ include "function/getFeedback.php";
                     
                 </div>
         <?php } ?>
+        
+        <?php } ?>
+
         <div class="row mt-4">
                         <div class="col-md-12 content-right">
                             <a href="<?php echo $host; ?>sendFeedback.php">
-                                <button class="btn btn-karcis-primary p-0 m-0" style="width: 180px; height: 50px;" type="submit">SUBMIT</button>
+                                <button class="btn btn-karcis-primary p-0 m-0" style="width: 180px; height: 50px;" type="submit">KIRIM FEEDBACK</button>
                             </a>
                         </div>
                     </div>
-        <?php } ?>
-
-
     </div>
 
 </div>
