@@ -4,30 +4,30 @@ include "function/getProfile.php";
 ?>
 
 <div class="profile-body">
-    <form action="<?php echo $host;?>function/actUpdateProfile.php" method="post" enctype="multipart/form-data">
+    <form action="<?php echo $host; ?>function/actUpdateProfile.php" method="post" enctype="multipart/form-data">
         <div class="profile-card">
             <h4>Edit Profile</h4>
-            <hr class="profile-line"/>
+            <hr class="profile-line" />
             <div class="form-row mx-auto pb-4">
-                <input type="hidden" name="id_user" value="<?php echo $user_profile['id_user'];?>">
+                <input type="hidden" name="id_user" value="<?php echo $user_profile['id_user']; ?>">
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Nama Lengkap</label>
-                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="text" autocomplete="off" name="fullname" value="<?php echo $user_profile['fullname'];?>">
+                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="text" autocomplete="off" name="fullname" value="<?php echo $user_profile['fullname']; ?>">
                 </div>
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Email</label>
-                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="email" autocomplete="off" name="email" value="<?php echo $user_profile['email'];?>">
+                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="email" autocomplete="off" name="email" value="<?php echo $user_profile['email']; ?>">
                 </div>
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Nomor Handphone</label>
-                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="text" autocomplete="off" name="phone" value="<?php echo $user_profile['phone'];?>">
+                    <input class="form-control font-field" style="width: 100%; height: 50px;" type="text" autocomplete="off" name="phone" value="<?php echo $user_profile['phone']; ?>">
                 </div>
                 <div class="form-group" style="width: 100%">
                     <label class="font-field-title">Identitas (KTP/SIM/PASSPORT)</label>
                     <input type="file" class="form-control" id="image" accept="image/*" onChange="validate(this.value)" name="userfile" style="padding: 3px;" accept=".jpg,.jpeg">
                 </div>
             </div>
-            <hr class="profile-line"/>
+            <hr class="profile-line" />
             <div class="row mt-4">
                 <div class="col-md-12 content-right">
                     <button class="btn btn-karcis-primary p-0 m-0" style="width: 180px; height: 50px;" type="submit">SIMPAN</button>
@@ -42,14 +42,7 @@ include "footer.php";
 ?>
 
 <script>
-function validate(file) {
-    var ext = file.split(".");
-    ext = ext[ext.length-1].toLowerCase();      
-    var arrayExtensions = ["jpg" , "jpeg", "png", "bmp", "gif"];
+    function validate(file) {
 
-    if (arrayExtensions.lastIndexOf(ext) == -1) {
-        alert("Wrong extension type.");
-        $("#image").val("");
     }
-}
 </script>
