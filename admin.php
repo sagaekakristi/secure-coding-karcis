@@ -5,6 +5,9 @@ include "header.php";
 
 $id = @$_SESSION['id'];
 
+if (!$id) {
+    header('location:' . $host . 'adminxyz.php');
+}
 ?>
 <div class="login-clean">
     <form>
