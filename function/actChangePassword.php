@@ -9,7 +9,7 @@ if(!$id){
     header('location:'.$host.'signin.php');
 }
 
-$password = sha1($_POST['password']);
+$password = hash("sha512", @$_POST['password']);
 
 // update data
 $user = "UPDATE users SET password = '$password' WHERE id = $id";

@@ -3,7 +3,7 @@
 
     $fullname = @$_POST['fullname'];
     $email    = @$_POST['email'];
-    $password  = sha1(@$_POST['password']);
+    $password = hash("sha512", @$_POST['password']);
 
     // insert to database
     $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";

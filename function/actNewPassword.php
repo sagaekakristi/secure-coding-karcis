@@ -2,7 +2,7 @@
 include "../conn.php";
 
 $token = @$_POST['token'];
-$password = sha1(@$_POST['password']);
+$password = hash("sha512", @$_POST['password']);
 $email = @$_POST['email'];
 
 $sql = "SELECT * FROM forgot_password where email = '$email' and hash = '$token' and flag = 0";

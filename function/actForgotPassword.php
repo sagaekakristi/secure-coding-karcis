@@ -2,7 +2,7 @@
     include "../conn.php";
 
     $email = @$_POST['email'];
-    $hash = sha1($email);
+    $hash = hash("sha512", $email);
     $link = $host."resetPassword.php?hash=".$hash;
 
 
