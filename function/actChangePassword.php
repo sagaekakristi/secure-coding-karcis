@@ -9,7 +9,10 @@ if(!$id){
     header('location:'.$host.'signin.php');
 }
 
-$password = hash("sha512", @$_POST['password']);
+$result = $conn->query("SELECT `email` from users WHERE id = $id");
+$row = $result->fetch_assoc();
+$email = $row['email'];
+$password = hash("sha512", $email . htmlentities(@$_POST['password'], ENT_QUOTES));
 
 // update data
 $user = "UPDATE users SET password = '$password' WHERE id = $id";

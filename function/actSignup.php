@@ -1,9 +1,9 @@
 <?php
     include "../conn.php";
 
-    $fullname = htmlentities(@$_POST['fullname'], ENT_QUOTES);
+    $fullname = strip_tags(@$_POST['fullname']);
     $email    = htmlentities(@$_POST['email'], ENT_QUOTES);
-    $password = hash("sha512", htmlentities(@$_POST['password'], ENT_QUOTES));
+    $password = hash("sha512", $email . htmlentities(@$_POST['password'], ENT_QUOTES));
 
     // insert to database
     $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";

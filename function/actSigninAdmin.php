@@ -2,7 +2,7 @@
     include "../conn.php";
 
     $email = @$_POST['email'];
-    $password = hash("sha512", @$_POST['password']);
+    $password = hash("sha512", $email . htmlentities(@$_POST['password'], ENT_QUOTES));
 
     $sql = "SELECT * FROM admin where email = '$email' and password = '$password'";
     $result = $conn->query($sql);
