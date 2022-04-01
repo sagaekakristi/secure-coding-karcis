@@ -9,7 +9,7 @@
         echo "<script>alert('Incorrect verification code');</script>" ;
     }
     else {
-        $email = @$_POST['email'];
+        $email = htmlentities(@$_POST['email'], ENT_QUOTES);
         $password = hash("sha512", $email . htmlentities(@$_POST['password'], ENT_QUOTES));
 
         $sql = "SELECT * FROM users where email = '$email' and password = '$password'";

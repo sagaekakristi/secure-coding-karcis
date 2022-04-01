@@ -3,7 +3,7 @@ include "../conn.php";
 include "passwordUtility.php";
 
 $token = @$_POST['token'];
-$email = @$_POST['email'];
+$email = htmlentities(@$_POST['email'], ENT_QUOTES);
 $raw_password = @$_POST['password'];
 
 $validation_result = check_password_strength($raw_password);
